@@ -223,7 +223,7 @@ export function MinecraftCharacter() {
   return (
     <Canvas
       shadows
-      camera={{ position: [6, 3, 9], fov: 38 }}
+      camera={{ position: [7, 2.5, 10], fov: 38 }}
       dpr={[1, 2]}
       gl={{ antialias: false }}
     >
