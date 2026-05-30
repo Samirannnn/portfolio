@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MinecraftCharacter } from "@/components/MinecraftCharacter";
 import { Typewriter } from "@/components/Typewriter";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +61,7 @@ const skills = [
 
 const GITHUB_URL = "https://github.com/Samirannnn";
 const LINKEDIN_URL = "https://www.linkedin.com/in/samiran-pal-948412321";
+const EMAIL = "psamiran295@gmail.com";
 
 function Index() {
   return (
@@ -148,6 +150,7 @@ function Hero() {
           <div className="absolute left-1/2 top-4 -translate-x-1/2 mc-nametag pointer-events-none">
             Samiran
           </div>
+          <SpeechBubble />
         </div>
       </div>
       <div className="mc-divider" />
@@ -276,6 +279,13 @@ function Contact() {
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a
               className="mc-btn"
+              style={{ background: "var(--mc-gold)", color: "#1a1a1a", textShadow: "none" }}
+              href={`mailto:${EMAIL}`}
+            >
+              Send Mail
+            </a>
+            <a
+              className="mc-btn"
               style={{ background: "var(--mc-grass-dark)" }}
               href={GITHUB_URL}
               target="_blank"
@@ -293,6 +303,9 @@ function Contact() {
               LinkedIn
             </a>
           </div>
+          <p className="mt-5 text-[10px] md:text-xs text-[var(--mc-aqua)] break-all">
+            {EMAIL}
+          </p>
         </div>
       </div>
     </section>
