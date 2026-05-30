@@ -274,30 +274,6 @@ function Skills() {
   );
 }
 
-function Achievements() {
-  return (
-    <section id="achievements" className="mc-dirt-bg py-20 px-6">
-      <div className="mx-auto max-w-5xl">
-        <SectionTitle>Achievements Unlocked</SectionTitle>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {achievements.map((a) => (
-            <div
-              key={a.text}
-              className="mc-panel-dark p-4 flex items-start gap-4"
-            >
-              <div className="text-2xl">{a.icon}</div>
-              <div className="text-[10px] md:text-xs leading-relaxed">
-                <div className="text-[var(--mc-yellow)] mb-1">Achievement get!</div>
-                {a.text}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Contact() {
   return (
     <section id="contact" className="mc-stone-bg py-20 px-6">
@@ -307,17 +283,11 @@ function Contact() {
           <p className="text-[10px] md:text-xs leading-loose">
             Want to collaborate, hire, or just talk pixels?
           </p>
-          <p className="mt-3 text-[10px] md:text-xs text-[var(--mc-aqua)]">
-            samiran.pal@example.com
-          </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a className="mc-btn" href="mailto:samiran.pal@example.com">
-              Send Mail
-            </a>
             <a
               className="mc-btn"
               style={{ background: "var(--mc-grass-dark)" }}
-              href="https://github.com/"
+              href={GITHUB_URL}
               target="_blank"
               rel="noreferrer"
             >
@@ -326,7 +296,7 @@ function Contact() {
             <a
               className="mc-btn"
               style={{ background: "var(--mc-stone-dark)" }}
-              href="https://www.linkedin.com/"
+              href={LINKEDIN_URL}
               target="_blank"
               rel="noreferrer"
             >
