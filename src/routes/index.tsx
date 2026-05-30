@@ -51,21 +51,15 @@ const projects = [
 
 const skills = [
   { label: "Python", level: 9 },
-  { label: "TensorFlow / PyTorch", level: 8 },
-  { label: "Computer Vision", level: 8 },
-  { label: "NLP", level: 7 },
-  { label: "React / TS", level: 7 },
-  { label: "Node.js", level: 6 },
-  { label: "SQL / MongoDB", level: 7 },
-  { label: "C / C++", level: 6 },
+  { label: "PyTorch / TensorFlow", level: 8 },
+  { label: "SQL", level: 7 },
+  { label: "C / C++", level: 7 },
+  { label: "Java", level: 6 },
+  { label: "Frontend Development", level: 8 },
 ];
 
-const achievements = [
-  { icon: "🏆", text: "Built 4+ end-to-end ML systems shipped in production-grade demos" },
-  { icon: "🎓", text: "B.Tech — Artificial Intelligence & Machine Learning" },
-  { icon: "💡", text: "Designed an offline V2V safety protocol from scratch" },
-  { icon: "🛠", text: "Full-stack capable: from CNN training loops to deployment UIs" },
-];
+const GITHUB_URL = "https://github.com/Samirannnn";
+const LINKEDIN_URL = "https://www.linkedin.com/in/samiran-pal-948412321";
 
 function Index() {
   return (
@@ -75,7 +69,6 @@ function Index() {
       <About />
       <Projects />
       <Skills />
-      <Achievements />
       <Contact />
       <Footer />
     </div>
@@ -94,7 +87,6 @@ function MCNav() {
             ["/about", "#about"],
             ["/projects", "#projects"],
             ["/skills", "#skills"],
-            ["/achievements", "#achievements"],
             ["/contact", "#contact"],
           ].map(([label, href]) => (
             <li key={href}>
