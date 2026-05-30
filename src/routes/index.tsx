@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MinecraftCharacter } from "@/components/MinecraftCharacter";
 import { Typewriter } from "@/components/Typewriter";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +61,7 @@ const skills = [
 
 const GITHUB_URL = "https://github.com/Samirannnn";
 const LINKEDIN_URL = "https://www.linkedin.com/in/samiran-pal-948412321";
+const EMAIL = "psamiran295@gmail.com";
 
 function Index() {
   return (
@@ -148,6 +150,7 @@ function Hero() {
           <div className="absolute left-1/2 top-4 -translate-x-1/2 mc-nametag pointer-events-none">
             Samiran
           </div>
+          <SpeechBubble />
         </div>
       </div>
       <div className="mc-divider" />
@@ -276,6 +279,13 @@ function Contact() {
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a
               className="mc-btn"
+              style={{ background: "var(--mc-gold)", color: "#1a1a1a", textShadow: "none" }}
+              href={`mailto:${EMAIL}`}
+            >
+              Send Mail
+            </a>
+            <a
+              className="mc-btn"
               style={{ background: "var(--mc-grass-dark)" }}
               href={GITHUB_URL}
               target="_blank"
@@ -293,6 +303,9 @@ function Contact() {
               LinkedIn
             </a>
           </div>
+          <p className="mt-5 text-[10px] md:text-xs text-[var(--mc-aqua)] break-all">
+            {EMAIL}
+          </p>
         </div>
       </div>
     </section>
@@ -306,5 +319,53 @@ function Footer() {
         © {new Date().getFullYear()} Samiran_Pal — Built with blocks, bits &amp; React.
       </p>
     </footer>
+  );
+}
+
+function SpeechBubble() {
+  const [visible, setVisible] = useState(true);
+  const [text, setText] = useState("");
+  const greeting = "Hi there! 👋 Welcome to my world.";
+
+  useEffect(() => {
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setText(greeting.slice(0, i));
+      if (i >= greeting.length) clearInterval(id);
+    }, 55);
+    const hide = setTimeout(() => setVisible(false), 7000);
+    return () => {
+      clearInterval(id);
+      clearTimeout(hide);
+    };
+  }, []);
+
+  if (!visible) return null;
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-16 -translate-x-1/2 max-w-[80%]">
+      <div
+        className="relative px-4 py-3 text-[10px] md:text-xs leading-relaxed text-black"
+        style={{
+          background: "#fff",
+          border: "3px solid #000",
+          boxShadow: "4px 4px 0 0 rgba(0,0,0,0.4)",
+        }}
+      >
+        {text}
+        <span className="mc-caret" />
+        {/* tail */}
+        <span
+          className="absolute left-1/2 -bottom-3 -translate-x-1/2"
+          style={{
+            width: 0,
+            height: 0,
+            borderLeft: "10px solid transparent",
+            borderRight: "10px solid transparent",
+            borderTop: "12px solid #000",
+          }}
+        />
+      </div>
+    </div>
   );
 }
