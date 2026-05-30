@@ -35,22 +35,23 @@ function Steve() {
   const root = useRef<THREE.Group>(null);
   const leftArm = useRef<THREE.Group>(null);
   const rightArm = useRef<THREE.Group>(null);
-  const leftLeg = useRef<THREE.Group>(null);
-  const rightLeg = useRef<THREE.Group>(null);
   const head = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
     if (root.current) {
-      root.current.position.y = Math.sin(t * 1.5) * 0.05;
-      root.current.rotation.y = Math.sin(t * 0.5) * 0.35;
+      // subtle breathing while seated
+      root.current.position.y = -0.5 + Math.sin(t * 1.4) * 0.03;
     }
-    if (head.current) head.current.rotation.y = Math.sin(t * 0.8) * 0.15;
-    const swing = Math.sin(t * 1.8) * 0.25;
-    if (leftArm.current) leftArm.current.rotation.x = swing;
-    if (rightArm.current) rightArm.current.rotation.x = -swing;
-    if (leftLeg.current) leftLeg.current.rotation.x = -swing * 0.6;
-    if (rightLeg.current) rightLeg.current.rotation.x = swing * 0.6;
+    if (head.current) {
+      // looking down at the laptop with tiny side glances
+      head.current.rotation.x = 0.35 + Math.sin(t * 0.6) * 0.04;
+      head.current.rotation.y = Math.sin(t * 0.7) * 0.08;
+    }
+    // typing — alternating tiny arm jitter
+    const type = Math.sin(t * 14) * 0.06;
+    if (leftArm.current) leftArm.current.rotation.x = -1.35 + type;
+    if (rightArm.current) rightArm.current.rotation.x = -1.35 - type;
   });
 
   // Units: 1 = 4 MC pixels. Head 2x2x2, body 2x3x1, arms/legs 1x3x1.
@@ -77,7 +78,7 @@ function Steve() {
       {/* Belt accent */}
       <PixelBox size={[2.02, 0.2, 1.02]} position={[0, -0.4, 0]} color={SHIRT_DARK} />
 
-      {/* Arms — pivot at shoulder */}
+      {/* Arms — pivot at shoulder, rotated forward for typing */}
       <group ref={leftArm} position={[-1.5, 2.4, 0]}>
         <PixelBox size={[1, 3, 1]} position={[0, -1.5, 0]} color={SHIRT} />
         <PixelBox size={[1.02, 0.8, 1.02]} position={[0, -3.4, 0]} color={SKIN} />
@@ -87,29 +88,121 @@ function Steve() {
         <PixelBox size={[1.02, 0.8, 1.02]} position={[0, -3.4, 0]} color={SKIN} />
       </group>
 
-      {/* Legs — pivot at hip */}
-      <group ref={leftLeg} position={[-0.5, -0.5, 0]}>
-        <PixelBox size={[1, 3, 1]} position={[0, -1.5, 0]} color={PANTS} />
-        <PixelBox size={[1.02, 0.4, 1.02]} position={[0, -3.2, 0]} color={SHOE} />
+      {/* Legs — seated, thighs forward from hip, shins down */}
+      {/* Left thigh + shin */}
+      <group position={[-0.5, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <PixelBox size={[1, 1.6, 1]} position={[0, -0.8, 0]} color={PANTS} />
       </group>
-      <group ref={rightLeg} position={[0.5, -0.5, 0]}>
-        <PixelBox size={[1, 3, 1]} position={[0, -1.5, 0]} color={PANTS} />
-        <PixelBox size={[1.02, 0.4, 1.02]} position={[0, -3.2, 0]} color={SHOE} />
+      <group position={[-0.5, -0.5, 1.6]}>
+        <PixelBox size={[1, 1.6, 1]} position={[0, -0.8, 0]} color={PANTS} />
+        <PixelBox size={[1.02, 0.35, 1.2]} position={[0, -1.75, 0.1]} color={SHOE} />
+      </group>
+      {/* Right thigh + shin */}
+      <group position={[0.5, -0.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <PixelBox size={[1, 1.6, 1]} position={[0, -0.8, 0]} color={PANTS} />
+      </group>
+      <group position={[0.5, -0.5, 1.6]}>
+        <PixelBox size={[1, 1.6, 1]} position={[0, -0.8, 0]} color={PANTS} />
+        <PixelBox size={[1.02, 0.35, 1.2]} position={[0, -1.75, 0.1]} color={SHOE} />
       </group>
     </group>
   );
 }
 
-function GrassBlock() {
+function DeskSetup() {
+  const screenGlow = useRef<THREE.MeshStandardMaterial>(null);
+  useFrame((state) => {
+    if (screenGlow.current) {
+      const t = state.clock.elapsedTime;
+      // subtle screen flicker
+      screenGlow.current.emissiveIntensity = 0.8 + Math.sin(t * 6) * 0.1;
+    }
+  });
+  const WOOD = "#7a4f2b";
+  const WOOD_DARK = "#5a3a1f";
+  const LAPTOP = "#2a2a2a";
   return (
-    <group position={[0, -4.7, 0]}>
-      <mesh>
-        <boxGeometry args={[4, 0.8, 4]} />
-        <meshStandardMaterial color="#866043" flatShading roughness={1} />
+    <group>
+      {/* Chair seat (behind character, under hips) */}
+      <mesh position={[0, -2.3, 0]} castShadow receiveShadow>
+        <boxGeometry args={[2.6, 0.4, 2.6]} />
+        <meshStandardMaterial color={WOOD} flatShading roughness={1} />
       </mesh>
-      <mesh position={[0, 0.45, 0]}>
-        <boxGeometry args={[4.02, 0.2, 4.02]} />
-        <meshStandardMaterial color="#5c9933" flatShading roughness={1} />
+      {/* Chair back */}
+      <mesh position={[0, -0.9, -1.1]} castShadow receiveShadow>
+        <boxGeometry args={[2.6, 3, 0.3]} />
+        <meshStandardMaterial color={WOOD_DARK} flatShading roughness={1} />
+      </mesh>
+      {/* Chair legs */}
+      {[[-1.1, -1.1], [1.1, -1.1], [-1.1, 1.1], [1.1, 1.1]].map(([x, z], i) => (
+        <mesh key={i} position={[x, -3.5, z]} castShadow>
+          <boxGeometry args={[0.3, 2, 0.3]} />
+          <meshStandardMaterial color={WOOD_DARK} flatShading roughness={1} />
+        </mesh>
+      ))}
+
+      {/* Desk top */}
+      <mesh position={[0, -1.6, 2.6]} castShadow receiveShadow>
+        <boxGeometry args={[6, 0.3, 3]} />
+        <meshStandardMaterial color={WOOD} flatShading roughness={1} />
+      </mesh>
+      {/* Desk edge trim */}
+      <mesh position={[0, -1.78, 2.6]}>
+        <boxGeometry args={[6.05, 0.1, 3.05]} />
+        <meshStandardMaterial color={WOOD_DARK} flatShading roughness={1} />
+      </mesh>
+      {/* Desk legs */}
+      {[[-2.7, 1.3], [2.7, 1.3], [-2.7, 3.9], [2.7, 3.9]].map(([x, z], i) => (
+        <mesh key={i} position={[x, -3.2, z]} castShadow>
+          <boxGeometry args={[0.3, 3, 0.3]} />
+          <meshStandardMaterial color={WOOD_DARK} flatShading roughness={1} />
+        </mesh>
+      ))}
+
+      {/* Laptop base */}
+      <mesh position={[0, -1.35, 2.4]} castShadow>
+        <boxGeometry args={[2.2, 0.12, 1.5]} />
+        <meshStandardMaterial color={LAPTOP} flatShading roughness={0.8} />
+      </mesh>
+      {/* Keyboard inset */}
+      <mesh position={[0, -1.28, 2.55]}>
+        <boxGeometry args={[1.9, 0.02, 1.1]} />
+        <meshStandardMaterial color="#1a1a1a" flatShading roughness={1} />
+      </mesh>
+      {/* Laptop screen (tilted back) */}
+      <group position={[0, -1.3, 1.65]} rotation={[-Math.PI / 2.4, 0, 0]}>
+        <mesh castShadow>
+          <boxGeometry args={[2.2, 1.5, 0.1]} />
+          <meshStandardMaterial color={LAPTOP} flatShading roughness={0.8} />
+        </mesh>
+        {/* Glowing display */}
+        <mesh position={[0, 0, 0.06]}>
+          <boxGeometry args={[1.95, 1.25, 0.02]} />
+          <meshStandardMaterial
+            ref={screenGlow}
+            color="#0a1f3d"
+            emissive="#4ec3ff"
+            emissiveIntensity={0.9}
+            flatShading
+            roughness={0.6}
+          />
+        </mesh>
+      </group>
+
+      {/* Coffee mug */}
+      <mesh position={[1.85, -1.25, 2.9]} castShadow>
+        <cylinderGeometry args={[0.22, 0.22, 0.5, 8]} />
+        <meshStandardMaterial color="#c9a84c" flatShading roughness={0.9} />
+      </mesh>
+      <mesh position={[1.85, -1.05, 2.9]}>
+        <cylinderGeometry args={[0.18, 0.18, 0.04, 8]} />
+        <meshStandardMaterial color="#3a2410" flatShading roughness={1} />
+      </mesh>
+
+      {/* Floor plate */}
+      <mesh position={[0, -4.6, 1]} receiveShadow>
+        <boxGeometry args={[10, 0.2, 8]} />
+        <meshStandardMaterial color="#2a2230" flatShading roughness={1} />
       </mesh>
     </group>
   );
@@ -145,12 +238,12 @@ export function MinecraftCharacter() {
       />
       <directionalLight position={[-5, 4, -5]} intensity={0.3} color="#8ab4ff" />
       <Steve />
-      <GrassBlock />
+      <DeskSetup />
       <OrbitControls
         enablePan={false}
         enableZoom={false}
-        minPolarAngle={Math.PI / 3}
-        maxPolarAngle={Math.PI / 1.9}
+        minPolarAngle={Math.PI / 3.2}
+        maxPolarAngle={Math.PI / 2.1}
       />
     </Canvas>
   );
