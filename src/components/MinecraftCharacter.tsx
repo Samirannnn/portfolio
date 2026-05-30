@@ -5,10 +5,12 @@ import * as THREE from "three";
 
 const SKIN = "#c08e6d";
 const HAIR = "#28170b";
-const SHIRT = "#00affa";
-const SHIRT_DARK = "#0084c4";
-const PANTS = "#2c5797";
-const SHOE = "#39200f";
+const SHIRT = "#f5f5f5";       // white shirt
+const SHIRT_DARK = "#d0d0d0";  // shirt shadow / belt accent
+const PANTS = "#5a5f66";       // gray trousers
+const SHOE = "#0a0a0a";        // black shoes
+const TIE = "#0b1f5c";         // deep blue tie
+const TIE_KNOT = "#081542";
 const EYE = "#ffffff";
 const PUPIL = "#3b2a8a";
 const MOUTH = "#5a3826";
@@ -65,6 +67,10 @@ function Steve() {
 
       <PixelBox size={[2, 3, 1]} position={[0, 1, 0]} color={SHIRT} />
       <PixelBox size={[2.02, 0.2, 1.02]} position={[0, -0.4, 0]} color={SHIRT_DARK} />
+      {/* Tie */}
+      <PixelBox size={[0.5, 0.4, 0.06]} position={[0, 2.3, 0.52]} color={TIE_KNOT} />
+      <PixelBox size={[0.7, 2.2, 0.06]} position={[0, 1, 0.52]} color={TIE} />
+      <PixelBox size={[0.5, 0.3, 0.06]} position={[0, -0.2, 0.52]} color={TIE_KNOT} />
 
       <group ref={leftArm} position={[-1.5, 2.4, 0]}>
         <PixelBox size={[1, 3, 1]} position={[0, -1.5, 0]} color={SHIRT} />
