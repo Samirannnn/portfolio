@@ -43,19 +43,11 @@ function Steve() {
       root.current.rotation.y = Math.sin(t * 0.5) * 0.2;
     }
     if (head.current) {
-      head.current.rotation.y = Math.sin(t * 0.8) * 0.15;
-      head.current.rotation.x = Math.sin(t * 0.6) * 0.05;
+      head.current.rotation.y = Math.sin(t * 0.6) * 0.1;
     }
-    // left arm relaxed
-    if (leftArm.current) {
-      leftArm.current.rotation.x = Math.sin(t * 1.5) * 0.05;
-      leftArm.current.rotation.z = 0;
-    }
-    // right arm raised + waving
-    if (rightArm.current) {
-      rightArm.current.rotation.z = -Math.PI; // straight up
-      rightArm.current.rotation.y = Math.sin(t * 6) * 0.5;
-    }
+    // arms relaxed at sides
+    if (leftArm.current) leftArm.current.rotation.set(0, 0, 0);
+    if (rightArm.current) rightArm.current.rotation.set(0, 0, 0);
   });
 
   return (
