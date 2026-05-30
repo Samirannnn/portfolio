@@ -63,6 +63,33 @@ const GITHUB_URL = "https://github.com/Samirannnn";
 const LINKEDIN_URL = "https://www.linkedin.com/in/samiran-pal-948412321";
 const EMAIL = "psamiran295@gmail.com";
 
+const services = [
+  {
+    icon: "🌐",
+    title: "Web Development",
+    desc: "Crafting fast, responsive, and scalable web applications — from pixel-perfect frontends to robust backend APIs.",
+    features: ["React / Next.js", "Node.js", "REST APIs", "MongoDB"],
+    color: "var(--mc-aqua)",
+    glowColor: "rgba(132,210,230,0.25)",
+  },
+  {
+    icon: "🎨",
+    title: "UI & UX Design",
+    desc: "Designing clean, intuitive interfaces that feel great to use — from wireframes to polished high-fidelity prototypes.",
+    features: ["Figma", "Prototyping", "Design Systems", "User Research"],
+    color: "var(--mc-gold)",
+    glowColor: "rgba(210,170,80,0.25)",
+  },
+  {
+    icon: "🤖",
+    title: "ML Model Training",
+    desc: "Building and training machine learning models that solve real problems — from data preprocessing to deployment.",
+    features: ["PyTorch / TensorFlow", "scikit-learn", "OpenCV", "NLP"],
+    color: "var(--mc-emerald)",
+    glowColor: "rgba(100,200,140,0.25)",
+  },
+];
+
 function Index() {
   return (
     <div className="min-h-screen">
@@ -71,6 +98,7 @@ function Index() {
       <About />
       <Projects />
       <Skills />
+      <Services />
       <Contact />
       <Footer />
     </div>
@@ -91,6 +119,7 @@ function MCNav() {
             ["/about", "#about"],
             ["/projects", "#projects"],
             ["/skills", "#skills"],
+            ["/services", "#services"],
             ["/contact", "#contact"],
           ].map(([label, href]) => (
             <li key={href}>
@@ -259,6 +288,76 @@ function Skills() {
                 ))}
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Services() {
+  return (
+    <section id="services" className="mc-obsidian-bg py-20 px-6">
+      <div className="mx-auto max-w-6xl">
+        <SectionTitle>// Services</SectionTitle>
+        <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+          {services.map((s) => (
+            <article
+              key={s.title}
+              className="mc-panel-dark p-6 md:p-8 flex flex-col gap-4 relative overflow-hidden"
+              style={{
+                boxShadow: `var(--shadow-pixel), 0 0 32px ${s.glowColor}`,
+              }}
+            >
+              {/* Pixel corner accent */}
+              <div
+                className="absolute top-0 right-0 w-3 h-3"
+                style={{ background: s.color }}
+              />
+              {/* Icon block */}
+              <div
+                className="grid h-14 w-14 place-items-center text-3xl mc-panel"
+                style={{
+                  boxShadow: `4px 4px 0 0 rgba(0,0,0,0.5), 0 0 12px ${s.glowColor}`,
+                }}
+              >
+                <span>{s.icon}</span>
+              </div>
+
+              {/* Title */}
+              <h3
+                className="text-xs md:text-sm mc-text-shadow"
+                style={{ color: s.color }}
+              >
+                {s.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-[10px] md:text-xs leading-loose text-white/75 flex-1">
+                {s.desc}
+              </p>
+
+              {/* Divider */}
+              <div className="mc-divider opacity-40" />
+
+              {/* Feature tags */}
+              <div className="flex flex-wrap gap-2">
+                {s.features.map((f) => (
+                  <span
+                    key={f}
+                    className="text-[9px] md:text-[10px] px-2 py-1"
+                    style={{
+                      background: "var(--mc-obsidian-2)",
+                      color: s.color,
+                      border: `1px solid ${s.color}`,
+                      opacity: 0.9,
+                    }}
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
       </div>
