@@ -321,3 +321,51 @@ function Footer() {
     </footer>
   );
 }
+
+function SpeechBubble() {
+  const [visible, setVisible] = useState(true);
+  const [text, setText] = useState("");
+  const greeting = "Hi there! 👋 Welcome to my world.";
+
+  useEffect(() => {
+    let i = 0;
+    const id = setInterval(() => {
+      i++;
+      setText(greeting.slice(0, i));
+      if (i >= greeting.length) clearInterval(id);
+    }, 55);
+    const hide = setTimeout(() => setVisible(false), 7000);
+    return () => {
+      clearInterval(id);
+      clearTimeout(hide);
+    };
+  }, []);
+
+  if (!visible) return null;
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-16 -translate-x-1/2 max-w-[80%]">
+      <div
+        className="relative px-4 py-3 text-[10px] md:text-xs leading-relaxed text-black"
+        style={{
+          background: "#fff",
+          border: "3px solid #000",
+          boxShadow: "4px 4px 0 0 rgba(0,0,0,0.4)",
+        }}
+      >
+        {text}
+        <span className="mc-caret" />
+        {/* tail */}
+        <span
+          className="absolute left-1/2 -bottom-3 -translate-x-1/2"
+          style={{
+            width: 0,
+            height: 0,
+            borderLeft: "10px solid transparent",
+            borderRight: "10px solid transparent",
+            borderTop: "12px solid #000",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
