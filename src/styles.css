@@ -97,6 +97,12 @@
   --mc-gray-ui-dark: oklch(0.36 0.005 250);
   --mc-sky: oklch(0.78 0.11 230);
   --mc-night: oklch(0.18 0.03 260);
+  --mc-obsidian: oklch(0.14 0.025 280);
+  --mc-obsidian-2: oklch(0.20 0.035 275);
+  --mc-emerald: oklch(0.72 0.16 155);
+  --gradient-obsidian: linear-gradient(160deg, oklch(0.12 0.025 275) 0%, oklch(0.18 0.04 270) 50%, oklch(0.14 0.05 290) 100%);
+  --shadow-pixel: 6px 6px 0 0 rgba(0,0,0,0.55);
+  --shadow-glow: 0 0 28px color-mix(in oklab, var(--mc-aqua) 35%, transparent);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -225,6 +231,39 @@
     radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
   background-size: 8px 8px, 12px 12px;
   background-position: 0 0, 4px 4px;
+}
+.mc-obsidian-bg {
+  background: var(--gradient-obsidian);
+  position: relative;
+}
+.mc-obsidian-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    radial-gradient(rgba(180,200,255,0.3) 1px, transparent 1px);
+  background-size: 120px 120px, 200px 200px;
+  background-position: 10px 30px, 60px 80px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.mc-divider {
+  height: 8px;
+  background-image: repeating-linear-gradient(90deg,
+    var(--mc-gold) 0 16px,
+    transparent 16px 32px);
+  opacity: 0.7;
+}
+.mc-chip {
+  display: inline-block;
+  padding: 6px 10px;
+  background: var(--mc-obsidian-2);
+  color: var(--mc-aqua);
+  border-top: 2px solid color-mix(in oklab, var(--mc-aqua) 30%, transparent);
+  border-left: 2px solid color-mix(in oklab, var(--mc-aqua) 30%, transparent);
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  font-size: 10px;
 }
 
 @keyframes mc-blink {
