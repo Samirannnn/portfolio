@@ -9,12 +9,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Samiran Pal — B.Tech in Artificial Intelligence & Machine Learning. A Minecraft-themed portfolio of projects, skills, and achievements.",
+          "Samiran Pal — Computer Science & Engineering undergrad. A Minecraft-themed portfolio of projects and skills.",
       },
-      { property: "og:title", content: "Samiran_Pal | AI/ML Engineer" },
+      { property: "og:title", content: "Samiran_Pal | CSE Undergrad" },
       {
         property: "og:description",
-        content: "A blocky, pixel-perfect portfolio for an AI/ML engineer.",
+        content: "A blocky, pixel-perfect portfolio for a CSE undergrad.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -131,7 +131,7 @@ function Hero() {
             Hi, I&apos;m <span className="text-[var(--mc-yellow)]">Samiran</span>
           </h1>
           <p className="mt-3 text-[10px] md:text-xs text-[var(--mc-gray-ui)]">
-            B.Tech — Artificial Intelligence &amp; Machine Learning
+            B.Tech — Computer Science &amp; Engineering
           </p>
 
           <div className="mt-6 min-h-[110px] text-xs md:text-sm leading-loose">
@@ -183,9 +183,9 @@ function About() {
             <span className="text-[var(--mc-aqua)]">&gt; whoami</span>
           </p>
           <p className="mt-3">
-            I&apos;m an AI/ML undergrad obsessed with turning research papers into things
-            that actually run. I like computer vision, NLP, and full-stack glue
-            code that lets models reach real users.
+            I&apos;m a Computer Science &amp; Engineering undergrad who likes turning
+            ideas into things that actually run — from clean backends to
+            polished front-ends, with a soft spot for AI/ML on the side.
           </p>
           <p className="mt-3">
             Outside the terminal you&apos;ll find me mining ideas, crafting prototypes,
