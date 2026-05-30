@@ -150,7 +150,6 @@ function Hero() {
           <div className="absolute left-1/2 top-4 -translate-x-1/2 mc-nametag pointer-events-none">
             Samiran
           </div>
-          <SpeechBubble />
         </div>
       </div>
       <div className="mc-divider" />
