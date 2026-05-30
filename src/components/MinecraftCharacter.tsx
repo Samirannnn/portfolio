@@ -57,22 +57,8 @@ function Steve() {
     <group ref={root} position={[0, -0.5, 0]}>
       <group ref={head} position={[0, 2.5, 0]}>
         <PixelBox size={[2, 2, 2]} position={[0, 1, 0]} color={SKIN} />
-        {/* Base hair cap */}
-        <PixelBox size={[2.02, 0.55, 2.02]} position={[0, 1.7, 0]} color={HAIR} />
-        {/* Messy tufts sticking up */}
-        <PixelBox size={[0.4, 0.45, 0.4]} position={[-0.6, 2.15, 0.2]} color={HAIR} />
-        <PixelBox size={[0.35, 0.3, 0.35]} position={[0.5, 2.05, -0.3]} color={HAIR_2} />
-        <PixelBox size={[0.3, 0.55, 0.3]} position={[0.1, 2.25, 0.6]} color={HAIR} />
-        <PixelBox size={[0.3, 0.25, 0.3]} position={[-0.2, 2.0, -0.6]} color={HAIR_2} />
-        {/* Front fringe — uneven bangs */}
-        <PixelBox size={[0.6, 0.4, 0.15]} position={[-0.55, 1.55, 1.0]} color={HAIR} />
-        <PixelBox size={[0.5, 0.55, 0.15]} position={[0.15, 1.5, 1.0]} color={HAIR} />
-        <PixelBox size={[0.4, 0.3, 0.15]} position={[0.7, 1.6, 1.0]} color={HAIR_2} />
-        {/* Back neck hair */}
+        <PixelBox size={[2.02, 0.6, 2.02]} position={[0, 1.7, 0]} color={HAIR} />
         <PixelBox size={[2.02, 0.3, 0.4]} position={[0, 1.25, -0.85]} color={HAIR} />
-        {/* Side sideburns */}
-        <PixelBox size={[0.1, 0.5, 1.6]} position={[-1.01, 1.4, 0]} color={HAIR} />
-        <PixelBox size={[0.1, 0.5, 1.6]} position={[1.01, 1.4, 0]} color={HAIR} />
         <PixelBox size={[0.5, 0.4, 0.05]} position={[-0.45, 1.05, 1.01]} color={EYE} />
         <PixelBox size={[0.5, 0.4, 0.05]} position={[0.45, 1.05, 1.01]} color={EYE} />
         <PixelBox size={[0.25, 0.4, 0.06]} position={[-0.35, 1.05, 1.02]} color={PUPIL} />
